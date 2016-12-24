@@ -74,41 +74,78 @@
 
   var consoleCounter = 0;
   var MyInterval, MyInterval2;
+  $(function() {
+  	  for(var i = 0; i < 10; i++)
+      {
+        document.body.innerHTML = document.body.innerHTML + "<div>";
+        for(var j = 0; j < 16; j++)
+        {
+          var naming = "button" + i + "dash" + j;
+          document.body.innerHTML = document.body.innerHTML + "<input type= 'button' id='"+naming+"' OnClick='SwapValue(" + i + ", " + j + ")'/>";
+          document.getElementById(naming).value = GoL[i][j];
+          if ((GoL[i][j]) == 1)
+          {
+            document.getElementById(naming).style.background='red';
+          }
+          else
+          {
+            document.getElementById(naming).style.background='green';
+          }
+        }
+        document.body.innerHTML = document.body.innerHTML + "</div>";
+      }
+  	});
 
-
+  function SwapValue(i,j)
+  {
+  	var buttonName = "button" + i + "dash" + j;
+  	if (GoL[i][j] == 0)
+  	{
+  		GoL[i][j] = 1;
+        document.getElementById(buttonName).style.background='red';
+        document.getElementById(buttonName).value = 1;
+  	}
+  	else
+  	{
+  		GoL[i][j] = 0;
+        document.getElementById(buttonName).style.background='green';
+        document.getElementById(buttonName).value = 0;
+  	}
+  }
   function LoopEverySecond() //Once the Start button has been hit, the code begins to loop
   {
-    document.getElementById('Startbtn').remove(); //the start button is removed
 
-    CreateButtons(); //the button are initially created
+    document.getElementById('Startbtn').remove(); //the start button is removed
 
     MyInterval = setInterval(UpdateArray, 1000); // this loops once every 1000 milliseconds
   }
 
 
 
-    function CreateButtons() 
-    {
-      for(var i = 0; i < 10; i++)
-      {
-        document.write("<div>");
-        for(var j = 0; j < 16; j++)
-        {
-          var naming = "button" + i + "dash" + j;
-          document.write("<input type= 'button' id='"+naming+"'/>")
-          document.getElementById(naming).value = GoL[i][j];
-          if ((GoL[i][j]) == 1)
-          {
-            document.getElementById(naming).style.background='red'
-          }
-          else
-          {
-            document.getElementById(naming).style.background='green'
-          }
-        }
-        document.write("</div>");
-      }
-    }
+
+    // function CreateButtons() 
+    // {
+    //   for(var i = 0; i < 10; i++)
+    //   {
+    //     document.body.innerHTML = document.body.innerHTML + "<div>";
+    //     for(var j = 0; j < 16; j++)
+    //     {
+    //       var naming = "button" + i + "dash" + j;
+    //       document.body.innerHTML = document.body.innerHTML + "<input type= 'button' id='"+naming+"'/>";
+    //       document.getElementById(naming).value = GoL[i][j];
+    //       if ((GoL[i][j]) == 1)
+    //       {
+    //         document.getElementById(naming).style.background='red';
+    //       }
+    //       else
+    //       {
+    //         document.getElementById(naming).style.background='green';
+    //       }
+    //     }
+    //     document.body.innerHTML = document.body.innerHTML + "</div>";
+    //   }
+
+    // }
 
 
 
@@ -127,11 +164,11 @@
           if ((tempGoL[i][j]) == 1)
           {
             var naming = "button" + i + "dash" + j;
-            document.getElementById(naming).style.background='red'
+            document.getElementById(naming).style.background='red';
             GoL[i][j] = 1;
           } else {
             var naming = "button" + i + "dash" + j;
-            document.getElementById(naming).style.background='green'
+            document.getElementById(naming).style.background='green';
             GoL[i][j] = 0;
           }
         }
@@ -825,6 +862,7 @@ if (i == 0) // if it's in the top right corner
 
     </script>
 
+    <label>Edit the starting set up of The Game Of Life by clicking on buttons to change their initial start state</label>
     <div id="Startbtn" onClick="LoopEverySecond()"></div>
 
 
